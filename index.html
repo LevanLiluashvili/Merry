@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Experience</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 15px 30px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    #message {
+      display: none;
+      margin-top: 35px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>🎧 დააჭირე ღილაკს</h2>
+
+  <button onclick="startExperience()">▶️ მუსიკის დაწყება</button>
+
+  <audio id="music" loop>
+    <source src="https://raw.githubusercontent.com/LevanLiluashvili/Merry/main/Christmas.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="message">
+    ✅ ეს არის საიდუმლო შეტყობინება 🎉
+  </div>
+
+  <div id="status"></div>
+
+  <script>
+    function startExperience() {
+      const audio = document.getElementById("music");
+      audio.play();
+
+      const now = new Date();
+
+      /*
+        ⏰ TIME WINDOW (UTC)
+
+        Example:
+        Local time (Georgia UTC+4): Jan 12, 01:07 – 01:45
+        UTC time:                  Jan 11, 21:07 – 21:45
+      */
+
+      const startTime = new Date(Date.UTC(2026, 0, 11, 21, 7));
+      const endTime   = new Date(Date.UTC(2026, 0, 11, 21, 45));
+
+      if (now >= startTime && now <= endTime) {
+        document.getElementById("message").style.display = "block";
+        document.getElementById("status").textContent = "";
+      } else if (now < startTime) {
+        document.getElementById("status").textContent = "⏳ ჯერ ადრეა — სცადე მოგვიანებით";
+      } else {
+        document.getElementById("status").textContent = "⌛ დრო ამოიწურა";
+      }
+    }
+  </script>
+
+</body>
+</html>
